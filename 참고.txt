@@ -1,0 +1,8 @@
+#nodejs mongoose 연결 (mongodb url 관련)
+https://velog.io/@yongh8445/Docker-MongoDB-Node.js-%EC%97%B0%EB%8F%99%ED%95%98%EA%B8%B0
+#mongodb 
+    #init
+        https://woolbro.tistory.com/90
+
+#typescript에서 jest 사용 시
+https://chinsun9.github.io/2021/08/07/start-jest-with-typescript/

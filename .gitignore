@@ -1,0 +1,4 @@
+/node_modules
+/coverage
+/globalConfig.json
+.env

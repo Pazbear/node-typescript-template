@@ -1,0 +1,24 @@
+#docker-compose.yml
+version: "3.8" #format version for this docker compose file
+services:
+  app:
+    build: .
+    container_name: app
+    command: yarn run start
+    ports:
+      - "${PROD_SERVER_PORT}:${PROD_SERVER_PORT}"
+    environment:
+      ENV: PROD
+    volumes:
+      - ./:/app
+      - /app/node_modules
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    restart: always
+    ports:
+      - 27017:27017
+    volumes:
+      - ./mongodb:/data/db
+    env_file:
+      - .env
