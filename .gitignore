@@ -2,3 +2,4 @@
 /coverage
 /globalConfig.json
 .env
+/mongodb
