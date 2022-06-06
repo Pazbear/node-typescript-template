@@ -1,10 +1,11 @@
 require("dotenv").config();
 
 import mongoose from "mongoose";
-import { addNewUser, connectDB, getAllUsers } from "./mongo";
-import { IUser } from "../db/models/User";
+import { connectDB } from "../../loader/mongo";
+import { IUser } from "../../db/models/User";
+import { createUser, findAllUsers } from "./user";
 
-describe("MongoDB Service", () => {
+describe("User Repository", () => {
   let mongoClient: typeof mongoose;
 
   beforeAll(async () => {
@@ -21,20 +22,20 @@ describe("MongoDB Service", () => {
   });
 
   test("Get all users", async () => {
-    const users = await getAllUsers();
+    const users = await findAllUsers();
 
     expect(users.length).toBe(0);
   });
 
-  test("Add new User", async () => {
+  test("Create User", async () => {
     const newUser: Partial<IUser> = {
       nickname: "testUser",
       email: "email@email.com",
       password: "password",
     };
-    await addNewUser(newUser);
+    await createUser(newUser);
 
-    const users = await getAllUsers();
+    const users = await findAllUsers();
     expect(users.length).toBe(1);
   });
 });
