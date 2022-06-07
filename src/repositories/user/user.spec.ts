@@ -9,12 +9,11 @@ describe("User Repository", () => {
   let mongoClient: typeof mongoose;
 
   beforeAll(async () => {
-    console.log(process.env.MONGO_TEST_URL);
-    mongoClient = await connectDB(process.env.MONGO_TEST_URL as string);
+    mongoClient = await connectDB(process.env.TEST_MONGO_URL as string);
   });
 
   afterAll(async () => {
-    await mongoClient.connection.close();
+    await mongoClient.connection.dropDatabase();
   });
 
   afterEach(async () => {

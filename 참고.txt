@@ -6,3 +6,6 @@ https://velog.io/@yongh8445/Docker-MongoDB-Node.js-%EC%97%B0%EB%8F%99%ED%95%98%E
 
 #typescript에서 jest 사용 시
 https://chinsun9.github.io/2021/08/07/start-jest-with-typescript/
+
+#typescript에서 jest mongodb 사용 시 (mongodb-memory-server 사용)
+https://dev.to/shyamajp/testing-nodejsexpress-app-mongodb-with-jest-and-supertest-56ce

@@ -6,11 +6,14 @@ import {
   findUserByEmail,
 } from "../repositories/user/user";
 import hash from "../modules/hash";
+import mongoose from "mongoose";
 
 export async function getAllUsers(req: Request, res: Response) {
   try {
+    console.log("getAllUser");
     res.status(200).send({ users: await findAllUsers() });
   } catch (err) {
+    console.error(err);
     throw new Error(err as string);
   }
 }
@@ -24,6 +27,7 @@ export async function register(req: Request, res: Response) {
       avatar: req.body.avatar,
     };
     await createUser(newUser);
+    res.status(201).send();
   } catch (err) {
     throw new Error(err as string);
   }
@@ -35,7 +39,7 @@ export async function login(req: Request, res: Response) {
     if (user) {
       const isValid = await hash.comparePassword(
         req.body.password,
-        user.password
+        user.password as string
       );
       if (isValid) {
         req.session.id = user.id;
