@@ -3,3 +3,4 @@
 /globalConfig.json
 .env
 /mongodb
+/src/configs

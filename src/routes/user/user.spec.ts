@@ -6,7 +6,7 @@ import mongoose from "mongoose";
 import { connectDB } from "../../loader/mongo";
 import { IUser } from "../../db/models/User";
 
-import * as userServices from "../../services/user";
+import * as userServices from "../../controllers/user";
 
 const agent = request.agent(app);
 
@@ -43,5 +43,29 @@ describe("User Routes", () => {
     };
     const res = await agent.post("/users/register").send(newUser);
     expect(res.statusCode).toEqual(201);
+  });
+
+  test("/users/login - 401", async () => {
+    const loginInfo = {
+      email: "test@test.com",
+      password: "password",
+    };
+    const res = await agent.post("/users/login").send(loginInfo);
+    expect(res.statusCode).toEqual(401);
+  });
+
+  test("/users/login - 200", async () => {
+    const newUser: Partial<IUser> = {
+      nickname: "newUser",
+      email: "test@test.com",
+      password: "password",
+    };
+    const loginInfo = {
+      email: "test@test.com",
+      password: "password",
+    };
+    await agent.post("/users/register").send(newUser);
+    const res = await agent.post("/users/login").send(loginInfo);
+    expect(res.statusCode).toEqual(200);
   });
 });
