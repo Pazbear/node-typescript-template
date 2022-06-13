@@ -1,1 +1,0 @@
-{"version":3,"file":"token_checker.js","sourceRoot":"","sources":["../../src/middleware/token_checker.ts"],"names":[],"mappings":";;;;;;AACA,yDAAiC;AAE1B,MAAM,YAAY,GAAG,UAC1B,GAAY,EACZ,GAAa,EACb,IAAkB;IAElB,MAAM,eAAe,GAAG,aAAG,CAAC,SAAS,CAAC,GAAG,CAAC,CAAC;IAC3C,GAAG,CAAC,MAAM,GAAG,eAAe,CAAC;IAC7B,IAAI,EAAE,CAAC;AACT,CAAC,CAAC;AARW,QAAA,YAAY,gBAQvB"}

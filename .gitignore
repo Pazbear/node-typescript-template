@@ -4,3 +4,4 @@
 .env
 /mongodb
 /src/configs
+/dist
