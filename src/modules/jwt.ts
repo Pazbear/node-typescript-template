@@ -31,26 +31,15 @@ export default class JWT {
     }
   };
 
-  static createJWT = async (user: Partial<IUser>): Promise<string> => {
-    const token = await jwt.sign(
-      { _id: user.id },
-      process.env.JWT_SECRET_KEY!,
-      {
-        expiresIn: "2h",
-      }
-    );
-    return token;
-  };
-
   static createJWT = async (
     user: Partial<IUser>,
-    expiresIn: string
+    expiresIn: string = "2h"
   ): Promise<string> => {
     const token = await jwt.sign(
       { _id: user.id },
       process.env.JWT_SECRET_KEY!,
       {
-        expiresIn: "30m",
+        expiresIn: expiresIn,
       }
     );
     return token;

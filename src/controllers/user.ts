@@ -5,6 +5,7 @@ import {
   findAllUsers,
   findUserByEmail,
   findUserById,
+  updateForgotPassword,
   updateUserVerified,
   updateVerifyToken,
 } from "../repositories/user/user";
@@ -100,7 +101,7 @@ export const sendVerificationMail: RequestHandler = async (
 
     const encryptedToken = await hash.encryptUserId(user.id!);
 
-    const jwtToken = await JWT.createEmailVerificationJWT(user);
+    const jwtToken = await JWT.createJWT(user, "30m");
 
     mail.send({
       to: user.email!,
@@ -146,7 +147,7 @@ export const sendForgotPasswordMail: RequestHandler = async (
 
     const encryptedToken = await hash.encryptUserId(user.id!);
 
-    const jwtToken = await JWT.createEmailVerificationJWT(user);
+    const jwtToken = await JWT.createJWT(user, "30m");
 
     mail.send({
       to: user.email!,
@@ -159,5 +160,25 @@ export const sendForgotPasswordMail: RequestHandler = async (
     res.json({ message: `성공적으로 보냈습니다.` });
   } catch (error) {
     return next(InternalServerError);
+  }
+};
+
+export const verifyForgotMail: RequestHandler = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const { token, password }: { token: string; password: string } = req.body;
+
+  try {
+    const decodedToken = JWT.decodeJWT(token);
+    const user = await findUserById(decodedToken._id);
+    if (!user) return next(createHttpError(401, "Token Invalid"));
+
+    const encryptedPassword = await hash.encryptPassword(password);
+    await updateForgotPassword(user.id!, encryptedPassword);
+    res.json({ message: "비밀번호가 변경되었습니다." });
+  } catch (error) {
+    return next(createHttpError(401, "Token Invalid"));
   }
 };

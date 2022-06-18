@@ -37,3 +37,15 @@ export async function updateUserVerified(userId: string): Promise<void> {
     $unset: { verifyToken: 0 },
   });
 }
+
+export async function updateForgotPassword(
+  userId: string,
+  password: string
+): Promise<void> {
+  const filter = { _id: userId };
+
+  await User.updateOne(filter, {
+    $set: { password: password },
+    $unset: { verifyToken: 0 },
+  });
+}
