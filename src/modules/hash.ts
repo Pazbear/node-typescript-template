@@ -7,9 +7,7 @@ export default {
   },
 
   encryptPassword: async (password: string) => {
-    console.log(password);
     const salt = await bcrypt.genSalt(saltRounds);
-    console.log(salt);
     return await bcrypt.hash(password, salt);
   },
 
