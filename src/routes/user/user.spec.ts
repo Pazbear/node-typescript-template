@@ -45,16 +45,16 @@ describe("User Routes", () => {
     expect(res.statusCode).toEqual(201);
   });
 
-  test("/users/login - 401", async () => {
+  test("/users/login - 404", async () => {
     const loginInfo = {
       email: "test@test.com",
       password: "password",
     };
     const res = await agent.post("/users/login").send(loginInfo);
-    expect(res.statusCode).toEqual(401);
+    expect(res.statusCode).toEqual(404); //유저 존재하지 않음
   });
 
-  test("/users/login - 200", async () => {
+  test("/users/login - 406", async () => {
     const newUser: Partial<IUser> = {
       nickname: "newUser",
       email: "test@test.com",
@@ -66,6 +66,6 @@ describe("User Routes", () => {
     };
     await agent.post("/users/register").send(newUser);
     const res = await agent.post("/users/login").send(loginInfo);
-    expect(res.statusCode).toEqual(200);
+    expect(res.statusCode).toEqual(406); //이메일인증 되지 않은 유저
   });
 });

@@ -46,7 +46,7 @@ export const register: RequestHandler = async (
       avatar: avatar,
     };
     await createUser(newUser);
-    return res.json({ msg: "유저가 생성되었습니다." });
+    return res.status(201).json({ msg: "유저가 생성되었습니다." });
   } catch (err) {
     console.error(err);
     return next(InternalServerError);

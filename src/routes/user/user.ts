@@ -11,7 +11,7 @@ import {
 } from "../../validation/user/userValidation";
 const router = express.Router();
 
-router.get("/all", authChecker, userServices.getAllUsers);
+router.get("/all", userServices.getAllUsers);
 router.post("/register", registerValidate, userServices.register);
 router.post("/login", loginValidate, userServices.login);
 router.post(
